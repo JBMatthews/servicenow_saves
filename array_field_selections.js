@@ -2,25 +2,19 @@
 //
 //
 
+// --- Glide Record
+var arrUsers = [];
+var gr = new GlideRecord('service_subscribe_company'); //Service Offerings selected
+gr.query(); // Query
+while (gr.next()) { // Cycle through and push into Array "arrUsers"
+    arrUsers.push(gr.user.toString());
+}	
+gs.print('sys_idIN' + arrUsers);
 
-var gr = new GlideRecord(''); //Service Offerings selected
-gr.query(''); //
 
-while(gr.next()){
-    
-}
-
-
-
-// EXAMPLE:
-//		if(!offerings)
-//			return false;
-//		var companyID = gs.getUser().getCompanyID();
-//		var gr = new GlideRecord("service_subscribe_company");
-//		gr.addQuery("core_company", companyID);
-//		gr.query();
-//		while(gr.next()){
-//			if(offerings.indexOf(gr.service_offering.name.toString())>-1)
-//				return true;
-//		}
-//		return false;
+// --- g_form
+var servOffsArry = []; // New Array to story ServiceOfferings selected
+var servoffs = g_form.getValue('u_service_offerings'); // Get objects from field
+var str = servoffs.toString(); // toString
+var splt = str.split(','); // split
+servOffsArry.push(splt);// Push into Array
