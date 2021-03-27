@@ -251,7 +251,7 @@ while (grEnt.next()) {
             }*/
         }
     }
-}
+
 
 
 
@@ -540,22 +540,7 @@ else {
 
 
 
-After Updated
--set variables (value, etc)
-If updated by matches caller, exit function
-If (updated by != caller; status != New; assigned_to is not null; comment or work notes)
- - Call Function
--If metric exists, exit
--Create metric
---value = true/false
-
-
-
-
 // THE FINAL DRAFT
-
-After Updated
-
 (function executeRule(current, previous /*null when async*/ ) {
 
     gs.info('J$ - LOG #1: \'Tag Lvl-1 Service Desk First Responders\' running...');
@@ -620,3 +605,23 @@ After Updated
         }
     }
 })(current, previous);
+
+
+
+
+
+    // Get current user
+    var currentUser = g_form.getUserID();
+
+    // Pull user's record
+    var UserGR = new GlideRecord('sys_user');
+    UserGR.addQuery('sys_id', currentUser);
+    UserGR.query();
+
+
+    // Auto-fill fields with values
+    if (UserGR.next()) {
+        var userEmail = UserGr.getValue('email');
+        g_form.setValue('call_center_email', userEmail);
+    }
+
